@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>100k Leaks — Audience Strategy</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0e0c;
+    --bg2: #151512;
+    --bg3: #1c1c18;
+    --bg4: #242420;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #f0ede6;
+    --text2: #a8a49a;
+    --text3: #6b6860;
+    --teal: #1D9E75;
+    --teal-dim: rgba(29,158,117,0.12);
+    --teal-border: rgba(29,158,117,0.3);
+    --amber: #d4890a;
+    --amber-dim: rgba(212,137,10,0.1);
+    --amber-border: rgba(212,137,10,0.25);
+    --coral: #c95c32;
+    --coral-dim: rgba(201,92,50,0.1);
+    --purple: #7c6fcd;
+    --purple-dim: rgba(124,111,205,0.1);
+    --green-accent: #4ade80;
+    --font-display: 'Syne', sans-serif;
+    --font-body: 'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 820px; margin: 0 auto; padding: 0 24px 120px; }
+
+  /* ── HERO ── */
+  .hero {
+    padding: 80px 0 64px;
+    border-bottom: 1px solid var(--border);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px; right: -80px;
+    width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(29,158,117,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .hero-tag {
+    display: inline-block;
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--teal);
+    border: 1px solid var(--teal-border);
+    background: var(--teal-dim);
+    padding: 5px 12px;
+    border-radius: 20px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 800;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--teal);
+  }
+  .hero-sub {
+    font-size: 17px;
+    color: var(--text2);
+    max-width: 560px;
+    line-height: 1.6;
+    margin-bottom: 36px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 28px;
+    flex-wrap: wrap;
+  }
+  .hero-stat {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .hero-stat-num {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .hero-stat-label {
+    font-size: 12px;
+    color: var(--text3);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+  }
+
+  /* ── NAV ── */
+  .toc {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+    padding: 28px 0;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 56px;
+  }
+  .toc a {
+    font-family: var(--font-display);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-decoration: none;
+    color: var(--text3);
+    padding: 5px 12px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    transition: all 0.15s;
+  }
+  .toc a:hover {
+    color: var(--text);
+    border-color: var(--border2);
+    background: var(--bg3);
+  }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 72px; }
+  .section-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 18px;
+    margin-bottom: 32px;
+  }
+  .section-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    color: var(--text3);
+    padding-top: 6px;
+    flex-shrink: 0;
+    width: 32px;
+  }
+  .section-title-wrap { flex: 1; }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(22px, 3.5vw, 30px);
+    font-weight: 700;
+    line-height: 1.15;
+    color: var(--text);
+    margin-bottom: 6px;
+  }
+  .section-desc {
+    font-size: 14px;
+    color: var(--text3);
+    font-style: italic;
+  }
+
+  /* ── CARDS ── */
+  .card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 10px;
+  }
+  .card + .card { margin-top: 10px; }
+  .card-label {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 8px;
+  }
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .card-body {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.7;
+  }
+  .card.accent-teal { border-color: var(--teal-border); background: var(--teal-dim); }
+  .card.accent-amber { border-color: var(--amber-border); background: var(--amber-dim); }
+  .card.accent-coral { border-color: rgba(201,92,50,0.25); background: var(--coral-dim); }
+  .card.accent-purple { border-color: rgba(124,111,205,0.25); background: var(--purple-dim); }
+
+  /* ── CALLOUT ── */
+  .callout {
+    border-left: 3px solid var(--teal);
+    background: var(--teal-dim);
+    border-radius: 0 10px 10px 0;
+    padding: 16px 20px;
+    margin: 20px 0;
+  }
+  .callout p { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .callout strong { color: var(--text); font-weight: 500; }
+
+  /* ── ANGLE BLOCK ── */
+  .angle-block {
+    background: var(--bg3);
+    border: 1px solid var(--border2);
+    border-radius: 14px;
+    padding: 28px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .angle-block::before {
+    content: '"';
+    position: absolute;
+    top: -10px; right: 16px;
+    font-family: var(--font-display);
+    font-size: 120px;
+    font-weight: 800;
+    color: rgba(29,158,117,0.06);
+    line-height: 1;
+    pointer-events: none;
+  }
+  .angle-text {
+    font-family: var(--font-display);
+    font-size: clamp(18px, 2.5vw, 22px);
+    font-weight: 700;
+    color: var(--teal);
+    line-height: 1.3;
+    margin-bottom: 12px;
+  }
+  .angle-body { font-size: 14px; color: var(--text2); line-height: 1.7; }
+
+  /* ── PAIN POINTS ── */
+  .pain-list { display: flex; flex-direction: column; gap: 0; }
+  .pain-item {
+    display: flex;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    align-items: flex-start;
+  }
+  .pain-item:last-child { border-bottom: none; }
+  .pain-num {
+    font-family: var(--font-display);
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--text3);
+    width: 28px;
+    flex-shrink: 0;
+    padding-top: 3px;
+  }
+  .pain-content { flex: 1; }
+  .pain-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 4px;
+    line-height: 1.4;
+  }
+  .pain-why { font-size: 13px; color: var(--text3); line-height: 1.6; }
+  .pain-tag {
+    flex-shrink: 0;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+  .pain-tag.high { background: rgba(201,92,50,0.15); color: #e07a52; }
+  .pain-tag.med { background: rgba(212,137,10,0.12); color: #d4890a; }
+
+  /* ── DM PREVIEW ── */
+  .dm-bubble {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 14px 14px 14px 2px;
+    padding: 16px 18px;
+    margin: 14px 0;
+    position: relative;
+  }
+  .dm-bubble::before {
+    content: 'WhatsApp message';
+    display: block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--teal);
+    margin-bottom: 10px;
+  }
+  .dm-bubble p {
+    font-size: 14px;
+    color: var(--text2);
+    line-height: 1.65;
+    white-space: pre-line;
+  }
+  .dm-bubble p + p { margin-top: 8px; }
+
+  /* ── MSG SEQUENCE ── */
+  .msg-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+  }
+  .msg-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    border-bottom: 1px solid var(--border);
+    background: var(--bg3);
+  }
+  .msg-badge {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    border-radius: 4px;
+  }
+  .msg-badge.m1 { background: rgba(29,158,117,0.15); color: var(--teal); }
+  .msg-badge.m2 { background: rgba(212,137,10,0.12); color: var(--amber); }
+  .msg-badge.m3 { background: rgba(201,92,50,0.12); color: var(--coral); }
+  .msg-badge.m4 { background: rgba(124,111,205,0.12); color: var(--purple); }
+  .msg-subject {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+  }
+  .msg-pain { font-size: 12px; color: var(--text3); margin-left: auto; font-style: italic; }
+  .msg-body { padding: 16px 18px; }
+  .msg-intent { font-size: 13px; color: var(--text3); margin-bottom: 12px; line-height: 1.6; }
+  .msg-text {
+    background: var(--bg4);
+    border-radius: 10px;
+    padding: 14px 16px;
+    font-size: 13.5px;
+    color: var(--text2);
+    line-height: 1.7;
+    white-space: pre-line;
+    border-left: 2px solid var(--border2);
+  }
+
+  /* ── ARC ── */
+  .arc-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .arc-week {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px 14px;
+    text-align: center;
+  }
+  .arc-week.w1 { border-top: 3px solid var(--teal); }
+  .arc-week.w2 { border-top: 3px solid var(--amber); }
+  .arc-week.w3 { border-top: 3px solid var(--coral); }
+  .arc-week.w4 { border-top: 3px solid var(--purple); }
+  .arc-wlabel {
+    font-family: var(--font-display);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-bottom: 6px;
+  }
+  .arc-wtheme {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .arc-wposts { font-size: 11px; color: var(--text3); }
+
+  .week-detail {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 10px;
+  }
+  .week-detail-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+  .week-dot {
+    width: 10px; height: 10px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .dot-teal { background: var(--teal); }
+  .dot-amber { background: var(--amber); }
+  .dot-coral { background: var(--coral); }
+  .dot-purple { background: var(--purple); }
+  .week-detail-title {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+  }
+  .week-posts { display: flex; flex-direction: column; gap: 8px; }
+  .week-post {
+    display: flex;
+    gap: 10px;
+    align-items: flex-start;
+  }
+  .week-post-num {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--text3);
+    width: 20px;
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .week-post-text { font-size: 13.5px; color: var(--text2); line-height: 1.6; }
+  .week-note {
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text3);
+    font-style: italic;
+  }
+
+  /* ── RULES ── */
+  .rules-list { display: flex; flex-direction: column; gap: 8px; }
+  .rule-item {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 16px;
+  }
+  .rule-icon {
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: var(--teal-dim);
+    border: 1px solid var(--teal-border);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .rule-icon svg { width: 10px; height: 10px; stroke: var(--teal); fill: none; stroke-width: 2.5; stroke-linecap: round; }
+  .rule-text { font-size: 14px; color: var(--text2); line-height: 1.6; }
+  .rule-text strong { color: var(--text); font-weight: 500; }
+
+  /* ── SEQUENCE TIMELINE ── */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 9px; top: 8px; bottom: 8px;
+    width: 1px;
+    background: var(--border2);
+  }
+  .tl-item { position: relative; margin-bottom: 24px; }
+  .tl-dot {
+    position: absolute;
+    left: -31px; top: 4px;
+    width: 18px; height: 18px;
+    border-radius: 50%;
+    background: var(--bg);
+    border: 1.5px solid var(--teal);
+    display: flex; align-items: center; justify-content: center;
+  }
+  .tl-dot-inner {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--teal);
+  }
+  .tl-title {
+    font-family: var(--font-display);
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 4px;
+  }
+  .tl-when { font-size: 12px; color: var(--teal); margin-bottom: 6px; }
+  .tl-body { font-size: 13.5px; color: var(--text2); line-height: 1.6; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 56px 0;
+  }
+
+  /* ── TAG INLINE ── */
+  .tag {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 3px 9px;
+    border-radius: 4px;
+    margin-bottom: 10px;
+  }
+  .tag-teal { background: var(--teal-dim); color: var(--teal); border: 1px solid var(--teal-border); }
+  .tag-amber { background: var(--amber-dim); color: var(--amber); border: 1px solid var(--amber-border); }
+  .tag-coral { background: var(--coral-dim); color: var(--coral); border: 1px solid rgba(201,92,50,0.25); }
+  .tag-purple { background: var(--purple-dim); color: var(--purple); border: 1px solid rgba(124,111,205,0.25); }
+  .tag-gray { background: var(--bg3); color: var(--text3); border: 1px solid var(--border2); }
+
+  /* ── ROW 2-COL ── */
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+
+  /* ── FOOTER ── */
+  .footer {
+    margin-top: 80px;
+    padding-top: 28px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: gap;
+  }
+  .footer-brand {
+    font-family: var(--font-display);
+    font-size: 13px;
+    font-weight: 700;
+    color: var(--text3);
+  }
+  .footer-brand span { color: var(--teal); }
+  .footer-note { font-size: 12px; color: var(--text3); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .arc-grid { grid-template-columns: repeat(2, 1fr); }
+    .row2 { grid-template-columns: 1fr; }
+    .hero h1 { font-size: 32px; }
+    .hero-meta { gap: 20px; }
+    .msg-pain { display: none; }
+  }
+
+  /* ── ANIMATIONS ── */
+  @media (prefers-reduced-motion: no-preference) {
+    .section {
+      opacity: 0;
+      transform: translateY(16px);
+      animation: fadein 0.5s ease forwards;
+    }
+    .section:nth-child(1) { animation-delay: 0.05s; }
+    .section:nth-child(2) { animation-delay: 0.1s; }
+    .section:nth-child(3) { animation-delay: 0.15s; }
+    .section:nth-child(4) { animation-delay: 0.2s; }
+    .section:nth-child(5) { animation-delay: 0.25s; }
+    .section:nth-child(6) { animation-delay: 0.3s; }
+    @keyframes fadein {
+      to { opacity: 1; transform: none; }
+    }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-tag">Marketing FM — Internal Strategy Doc</div>
+    <h1>100k Leaks<br><em>Audience Strategy</em></h1>
+    <p class="hero-sub">A complete playbook for rebuilding, warming, and converting a quiet WhatsApp group into a paying audience for the 4-Week Biz Pawa Up coaching programme.</p>
+    <div class="hero-meta">
+      <div class="hero-stat">
+        <div class="hero-stat-num">35</div>
+        <div class="hero-stat-label">Members</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Phases</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">4 + 4</div>
+        <div class="hero-stat-label">Weeks of content</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">1</div>
+        <div class="hero-stat-label">Product being sold</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOC -->
+  <nav class="toc" aria-label="Sections">
+    <a href="#context">Context</a>
+    <a href="#sequence">Master sequence</a>
+    <a href="#dm">DM outreach</a>
+    <a href="#reentry">Re-entry post</a>
+    <a href="#angle">The angle</a>
+    <a href="#painpoints">Pain points</a>
+    <a href="#dataseries">Data series</a>
+    <a href="#arc">4-week arc</a>
+    <a href="#rules">Rules</a>
+  </nav>
+
+  <!-- SECTION 0 — CONTEXT -->
+  <div class="section" id="context">
+    <div class="section-header">
+      <div class="section-num">00</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The situation</div>
+        <div class="section-desc">What we're working with and why it matters</div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="card">
+        <div class="card-label">The group</div>
+        <div class="card-title">100k Leaks Lab</div>
+        <div class="card-body">35 members. WhatsApp Community. Went quiet due to low engagement killing momentum. Members are existing business owners — not hobbyists — who are stuck selling only to people they already know.</div>
+      </div>
+      <div class="card">
+        <div class="card-label">The product</div>
+        <div class="card-title">4-Week Biz Pawa Up</div>
+        <div class="card-body">Karl coaches business owners personally over daily calls and WhatsApp for 4 weeks until they get customers they didn't already know. KSh 5,000 (group) to KSh 25,000 (1:1). Guarantee: first new-money sale in Month 1 or refund.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>The core problem to solve:</strong> The group is quiet because nothing posted before felt directly relevant to what members were actually experiencing. The fix is not better content — it's better targeting. From this point, every post is written for one specific person: an existing business owner who is making some money but cannot figure out how to grow beyond the people who already know them.</p>
+    </div>
+
+    <div class="card accent-amber">
+      <div class="card-label">Critical insight</div>
+      <div class="card-title">The group doesn't know you don't know what they sell</div>
+      <div class="card-body">There is no data on what these 35 people sell. This is the first problem to fix — before a single post goes out. The individual DM outreach in Phase 1 solves this. Everything after it becomes more targeted because of it.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 1 — MASTER SEQUENCE -->
+  <div class="section" id="sequence">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div class="section-title-wrap">
+        <div class="section-title">Master sequence</div>
+        <div class="section-desc">The order of operations. Do not skip or reorder.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>The sequence is: DMs first → re-entry post second → data series third → 4-week arc fourth.</strong> A quiet group cannot be reactivated by posting into it. It must be reactivated person by person first, then addressed as a group.</p>
+    </div>
+
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-title">Phase 1 — DM all 35 individually</div>
+        <div class="tl-when">Days 1–3</div>
+        <div class="tl-body">Re-warm every member privately. Ask what they sell. Log every reply. This is intelligence gathering, not outreach. The replies become your content bible.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-title">Phase 2 — Re-entry post</div>
+        <div class="tl-when">Day 3–4 (once 8+ DM replies are in)</div>
+        <div class="tl-body">First group message. Not a lesson — an announcement of new direction. Earns permission to teach. Sets expectation for what's coming.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-title">Phase 3 — Data series (4 messages)</div>
+        <div class="tl-when">Week 1–2 (3x per week pace)</div>
+        <div class="tl-body">Four messages that expose the cost of operating without information. Teaches the importance of data using zero jargon and 100% Kenyan SME examples. Creates the felt need for everything that follows.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-title">Phase 4 — 4-week content arc</div>
+        <div class="tl-when">Weeks 3–6</div>
+        <div class="tl-body">12 posts mirroring the Biz Pawa Up exactly. Diagnose → Build → Get customers → Lock it in. Coaching offer introduced naturally at the end of Week 4. No pitch before then.</div>
+      </div>
+      <div class="tl-item">
+        <div class="tl-dot"><div class="tl-dot-inner"></div></div>
+        <div class="tl-title">Phase 5 — Private DM to most engaged members</div>
+        <div class="tl-when">Week 4 (alongside final posts)</div>
+        <div class="tl-body">Identify 2–3 members who replied most consistently. DM them directly with the 1:1 coaching offer before the group-wide mention. First paying clients should come from here.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 2 — DM OUTREACH -->
+  <div class="section" id="dm">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div class="section-title-wrap">
+        <div class="section-title">DM outreach</div>
+        <div class="section-desc">Before the first group post. 35 individual messages.</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Purpose</div>
+      <div class="card-body">This is not marketing. It is reconnaissance. You need to know what these 35 people sell before you post anything to the group. The DM also re-warms a cold contact — they remember who Karl is before any group post hits their screen. Without this step, you are broadcasting into silence.</div>
+    </div>
+
+    <div class="dm-bubble">
+      <p>Hey [name] 👋 It's Karl from the 100k Leaks group. I've been rebuilding the whole direction of the group and I want to make sure what I share actually applies to what you're doing.</p>
+      <p>Quick one — what kind of business are you running right now? Even if it's still small, I want to know.</p>
+    </div>
+
+    <div class="card accent-teal">
+      <div class="card-label">What to listen for</div>
+      <div class="card-body">How many are product-based (food, fashion, crafts) vs service-based (cleaning, beauty, errands). Whether they mention a problem without being asked — that's a future post topic. Whether any say "I've been meaning to do something with this business." Those are your first coaching conversations.</div>
+    </div>
+
+    <div class="card">
+      <div class="card-label">Log every reply</div>
+      <div class="card-body">Keep a simple note: Name / What they sell / Status (active, dormant, just starting). After 35 replies, you will know exactly which examples to use in every post. Reference real members in posts without naming them: <em>"One member in this group sells cakes from her kitchen and told me she has no idea which flavour makes her the most money."</em> That specificity is what gets replies.</div>
+    </div>
+
+    <div class="card accent-amber">
+      <div class="card-label">Timing rule</div>
+      <div class="card-body">Do not wait for all 35 to reply before posting to the group. Start DMs Monday. Post the re-entry message Wednesday or Thursday once you have at least 8–10 replies. The intel from replies shapes your <em>future</em> posts — not the first one.</div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 3 — RE-ENTRY POST -->
+  <div class="section" id="reentry">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The re-entry post</div>
+        <div class="section-desc">First group message. Not a lesson — permission to teach.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Why this is not a content post:</strong> A group that went quiet because of low engagement needs trust restored before information is delivered. If you open with a lesson, the people who never replied to anything will think "here we go again." The re-entry post is an announcement of new direction — it earns permission, it does not spend it.</p>
+    </div>
+
+    <div class="dm-bubble">
+      <p>This group has been quiet for a while. That's on me — I wasn't posting things that actually connected to what you're dealing with day to day.</p>
+      <p>That changes now.</p>
+      <p>Starting this week I'm going to be walking through the exact 4 things every small business owner needs to figure out to stop selling only to people they already know.</p>
+      <p>It's not complicated. But most people skip at least one of them — and that's exactly where the money stops.</p>
+      <p>First one drops [day]. See you then. 🔑</p>
+    </div>
+
+    <div class="row2">
+      <div class="card accent-teal">
+        <div class="card-label">What this does</div>
+        <div class="card-body">Takes accountability without over-apologising. Names the new direction clearly. Creates anticipation for what's coming without revealing it. Does not ask for engagement — states what's happening.</div>
+      </div>
+      <div class="card accent-coral">
+        <div class="card-label">What to avoid</div>
+        <div class="card-body">Do not open with a question. Do not ask "what do you want to learn?" Do not apologise excessively. Do not tease with "something big is coming." State the direction and post it.</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 4 — THE ANGLE & PAIN POINTS -->
+  <div class="section" id="angle">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The angle</div>
+        <div class="section-desc">The single lens everything is taught through.</div>
+      </div>
+    </div>
+
+    <div class="angle-block">
+      <div class="angle-text">"You are not broke.<br>You are operating blind."</div>
+      <div class="angle-body">This is the thread running through every post, every week, every data conversation. Your audience isn't failing because they're lazy or unskilled — they're failing because they don't know what's actually happening inside their business. No customer data. No revenue tracking. No pattern recognition. They are making decisions in the dark and wondering why nothing improves. Every post you write exposes one more thing they didn't know they didn't know.</div>
+    </div>
+
+    <div class="callout">
+      <p>This angle matters because your audience has heard <em>"you need to market better"</em> a hundred times and tuned it out. But <em>"you don't know what's happening inside your own business"</em> is different. It's not an accusation. It's a revelation. Most of them will read it and think: <em>he's right, I actually don't.</em> That moment of recognition is what makes them stay in the group.</p>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 5 — PAIN POINTS -->
+  <div class="section" id="painpoints">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The 8 pain points</div>
+        <div class="section-desc">In order of urgency. Every post maps to at least one of these.</div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:16px;">
+      <div class="card-body">These are the real problems your target audience is living with right now — validated across Kenyan SME research, Reddit's small business communities, and the actual replies you'll get from the 35 DMs. Every group post you write should make at least one of these people feel like it was written specifically for them.</div>
+    </div>
+
+    <div class="pain-list">
+      <div class="pain-item">
+        <div class="pain-num">01</div>
+        <div class="pain-content">
+          <div class="pain-title">They sell to the same 10 people every month and call it loyal customers.</div>
+          <div class="pain-why">Their warm circle is their ceiling. They have mistaken familiarity for a business. This is the core problem the 4-Week Pawa Up solves.</div>
+        </div>
+        <div class="pain-tag high">Core</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">02</div>
+        <div class="pain-content">
+          <div class="pain-title">They don't know if they made a profit last month — only if they made a sale.</div>
+          <div class="pain-why">Revenue and profit feel the same until they don't. The data conversation starts here because it requires zero tools to understand and hits immediately.</div>
+        </div>
+        <div class="pain-tag high">Core</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">03</div>
+        <div class="pain-content">
+          <div class="pain-title">They have no idea which product makes them the most money.</div>
+          <div class="pain-why">They price by feel and push whatever seems popular. The bestseller is often the worst margin item. Most Kenyan SME owners have never calculated this.</div>
+        </div>
+        <div class="pain-tag high">High</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">04</div>
+        <div class="pain-content">
+          <div class="pain-title">Customers who bought once vanished — and there was zero follow-up.</div>
+          <div class="pain-why">Dead customers are untapped revenue. One customer returning twice is worth three new customers. Most owners have no names or numbers from past buyers.</div>
+        </div>
+        <div class="pain-tag high">High</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">05</div>
+        <div class="pain-content">
+          <div class="pain-title">They post content but cannot explain why no one buys from it.</div>
+          <div class="pain-why">Likes are not orders. They don't know the difference between awareness content and conversion content. A data problem disguised as a content problem.</div>
+        </div>
+        <div class="pain-tag med">Medium</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">06</div>
+        <div class="pain-content">
+          <div class="pain-title">They get customers through referrals but don't know who referred them or how to get more.</div>
+          <div class="pain-why">Word of mouth is their best channel and they treat it like luck. Tracking referrals turns luck into a repeatable system.</div>
+        </div>
+        <div class="pain-tag med">Medium</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">07</div>
+        <div class="pain-content">
+          <div class="pain-title">Late payments and credit customers are bleeding them — silently.</div>
+          <div class="pain-why">The M-Pesa era made credit feel normal. Tracking what's owed is the most ignored number in a Kenyan SME. Even 2–3 customers on unpaid credit can kill cash flow for weeks.</div>
+        </div>
+        <div class="pain-tag med">Medium</div>
+      </div>
+      <div class="pain-item">
+        <div class="pain-num">08</div>
+        <div class="pain-content">
+          <div class="pain-title">They don't know where the next customer is coming from — so they do nothing until they need money.</div>
+          <div class="pain-why">No pipeline thinking. No proactive outreach. The business is entirely reactive. Solved in Week 3 of the Pawa Up — but must be felt as a pain point first.</div>
+        </div>
+        <div class="pain-tag med">Medium</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 6 — DATA SERIES -->
+  <div class="section" id="dataseries">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The data series</div>
+        <div class="section-desc">4 messages. Sent before the 4-week arc begins.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Why data first:</strong> Your audience doesn't care about systems, frameworks, or coaching until they feel the pain of operating without information. These 4 messages create that feeling. Each one exposes a specific blind spot using a real Kenyan SME scenario. By Message 4, they are thinking: <em>"I actually don't know my own numbers."</em> That is the moment they become ready to learn anything you teach next. The data posts are also a slow-motion hand raise — every "NO" reply is someone telling you they need what you're selling, without you having pitched anything.</p>
+    </div>
+
+    <!-- MSG 1 -->
+    <div class="msg-card">
+      <div class="msg-header">
+        <span class="msg-badge m1">Message 1</span>
+        <span class="msg-subject">The sale vs. the profit problem</span>
+        <span class="msg-pain">Pain point #02</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-intent">Teach the difference between revenue and profit using one example a food seller or service provider would recognise instantly. End with a binary question they can answer in their head right now. Replies of "NO" are your leads.</div>
+        <div class="msg-text">Most small business owners count sales.
+The ones who grow count profit.
+
+There's a difference — and it's costing you money right now.
+
+Say you make 10 mandazis and sell them all for Ksh 500.
+You spent Ksh 320 on oil, flour, and gas.
+You made Ksh 180. Not Ksh 500.
+
+That gap between what came in and what it cost you — that's the number your business actually runs on.
+
+Most people never write it down. So they never see it shrinking.
+
+Quick one: Do you know your profit number from last week? Not sales — profit.
+Reply YES or NO. No judgment. 👇</div>
+      </div>
+    </div>
+
+    <!-- MSG 2 -->
+    <div class="msg-card">
+      <div class="msg-header">
+        <span class="msg-badge m2">Message 2</span>
+        <span class="msg-subject">The customer you forgot about</span>
+        <span class="msg-pain">Pain point #04</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-intent">Show what a dormant customer is worth vs. the cost of finding a new one. Make them count how many people they've sold to who never came back. End with a concrete homework that takes 2 minutes.</div>
+        <div class="msg-text">How many people bought from you in the last 3 months — and never came back?
+
+Don't guess. Actually think about it.
+
+Every one of those people already trusted you enough to give you money once. They're not strangers. They're the easiest sale you're not making.
+
+Getting a new customer costs effort — posts, outreach, convincing.
+Getting an old customer back costs one message.
+
+But most business owners don't even know who those people are. No name. No number. No record.
+
+That's not bad luck. That's missing data.
+
+Your homework: Write down 3 names of people who bought from you and went quiet. Just 3.
+We'll talk about what to do with that list next time. 📋</div>
+      </div>
+    </div>
+
+    <!-- MSG 3 -->
+    <div class="msg-card">
+      <div class="msg-header">
+        <span class="msg-badge m3">Message 3</span>
+        <span class="msg-subject">The product you're pushing vs. the one making you money</span>
+        <span class="msg-pain">Pain point #03</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-intent">Walk them through finding their most profitable product in 10 minutes using nothing but their memory. No tools required. Exposes the gap between what feels popular and what actually pays.</div>
+        <div class="msg-text">Quick question: which product or service makes you the most money?
+
+Not the one that sells the most.
+The one that leaves the most in your pocket per sale.
+
+Most business owners don't know. They push what's popular — which is usually the cheapest item with the thinnest margin.
+
+Here's how to check right now:
+Take your top 3 products. For each one, subtract what it costs you to deliver it from what you charge.
+That gap is your margin.
+
+Whichever gap is biggest — that's the product your business should be built around.
+
+If you've never done this, you've been guessing.
+And guessing keeps you stuck. 🔍</div>
+      </div>
+    </div>
+
+    <!-- MSG 4 -->
+    <div class="msg-card">
+      <div class="msg-header">
+        <span class="msg-badge m4">Message 4</span>
+        <span class="msg-subject">The full picture — and what's coming</span>
+        <span class="msg-pain">Pain points #01 + #08</span>
+      </div>
+      <div class="msg-body">
+        <div class="msg-intent">Tie the three previous messages together. Name the pattern — operating blind. Then introduce the 4-week arc as the solution without pitching it yet. Creates anticipation, not pressure.</div>
+        <div class="msg-text">Over the last few messages I've been asking you to look at three numbers:
+Your profit. Your dormant customers. Your best margin product.
+
+If you found it hard to answer any of those — that's the real problem.
+Not your marketing. Not your prices. Not the economy.
+
+You're running on memory and guesswork.
+And memory is not a business system.
+
+The businesses that grow consistently are not smarter.
+They just know their numbers. They know who bought last week, what worked, and what to do tomorrow.
+
+That's what I'm going to walk through here — step by step — starting next week.
+
+Four things. One per week. By the end you'll know exactly what's blocking your growth and what to do about it.
+
+Stay here. 🔑</div>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 7 — 4-WEEK ARC -->
+  <div class="section" id="arc">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The 4-week content arc</div>
+        <div class="section-desc">12 posts. Mirrors the Biz Pawa Up exactly. 3 per week.</div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>The logic:</strong> Walking the group through the same 4 weeks as the coaching programme does two things simultaneously. It delivers genuine value to people who will never pay. And it makes the paid product feel like a natural continuation to everyone who wants to go deeper — not a separate upsell. By Week 4, the group has experienced a preview of what working with Karl feels like. The offer writes itself.</p>
+    </div>
+
+    <div class="arc-grid">
+      <div class="arc-week w1">
+        <div class="arc-wlabel">Week 1</div>
+        <div class="arc-wtheme">Diagnose</div>
+        <div class="arc-wposts">3 posts</div>
+      </div>
+      <div class="arc-week w2">
+        <div class="arc-wlabel">Week 2</div>
+        <div class="arc-wtheme">Build</div>
+        <div class="arc-wposts">3 posts</div>
+      </div>
+      <div class="arc-week w3">
+        <div class="arc-wlabel">Week 3</div>
+        <div class="arc-wtheme">Get customers</div>
+        <div class="arc-wposts">3 posts</div>
+      </div>
+      <div class="arc-week w4">
+        <div class="arc-wlabel">Week 4</div>
+        <div class="arc-wtheme">Lock it in</div>
+        <div class="arc-wposts">3 posts</div>
+      </div>
+    </div>
+
+    <!-- Week 1 -->
+    <div class="week-detail">
+      <div class="week-detail-header">
+        <div class="week-dot dot-teal"></div>
+        <div class="week-detail-title">Week 1 — Diagnose</div>
+      </div>
+      <div class="week-posts">
+        <div class="week-post">
+          <div class="week-post-num">P1</div>
+          <div class="week-post-text">How to read your business in 15 minutes using just your M-Pesa history. Walk them through what the numbers tell them — with a specific example of what to look for and what it means.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P2</div>
+          <div class="week-post-text">The 3 questions every stuck business cannot answer. Pose the questions, let them sit with the discomfort, then explain why those questions are the starting point for everything.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P3</div>
+          <div class="week-post-text">What your best month actually tells you — and what it doesn't. Reframe the idea of a "good month" from a feeling into a set of specific numbers. End with a question they can answer in one line.</div>
+        </div>
+      </div>
+      <div class="week-note">Every post this week ends with a question they can answer in one line. The replies are your engagement engine. Respond to every single one personally.</div>
+    </div>
+
+    <!-- Week 2 -->
+    <div class="week-detail">
+      <div class="week-detail-header">
+        <div class="week-dot dot-amber"></div>
+        <div class="week-detail-title">Week 2 — Build</div>
+      </div>
+      <div class="week-posts">
+        <div class="week-post">
+          <div class="week-post-num">P4</div>
+          <div class="week-post-text">Why most people price wrong — and how to fix it today. The real cost of underpricing explained without making them feel stupid. One practical exercise to try immediately.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P5</div>
+          <div class="week-post-text">What a real offer looks like vs. "I sell X for Y." The difference between stating a product and making an offer. Use one example from the DM replies without naming the person.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P6</div>
+          <div class="week-post-text">The one thing customers need to see before they buy from someone new. Social proof, specificity, and what trust looks like at the micro-business level — with zero tech required.</div>
+        </div>
+      </div>
+      <div class="week-note">This week transitions from insight to action. First small calls to action appear — not to buy the coaching, but to try something specific in their business. "Do this today and tell me what happened."</div>
+    </div>
+
+    <!-- Week 3 -->
+    <div class="week-detail">
+      <div class="week-detail-header">
+        <div class="week-dot dot-coral"></div>
+        <div class="week-detail-title">Week 3 — Get customers</div>
+      </div>
+      <div class="week-posts">
+        <div class="week-post">
+          <div class="week-post-num">P7</div>
+          <div class="week-post-text">The WhatsApp message that brings back old customers. Give them the actual template — word for word. Let them copy it and send it to the 3 names they wrote down in Data Message 2.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P8</div>
+          <div class="week-post-text">How to turn one sale into three without spending anything. The referral mechanic explained simply — why it doesn't happen automatically and the one thing that makes it happen consistently.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P9</div>
+          <div class="week-post-text">Why your Instagram posts get likes but not orders — and the one change that fixes it. The difference between content that builds an audience and content that gets you paid. Practical, not preachy.</div>
+        </div>
+      </div>
+      <div class="week-note">This is the most practical week. Each post has a specific action they can take that same day. Track who actually does the homework and replies — those are your warmest leads for the Week 4 private DM.</div>
+    </div>
+
+    <!-- Week 4 -->
+    <div class="week-detail">
+      <div class="week-detail-header">
+        <div class="week-dot dot-purple"></div>
+        <div class="week-detail-title">Week 4 — Lock it in</div>
+      </div>
+      <div class="week-posts">
+        <div class="week-post">
+          <div class="week-post-num">P10</div>
+          <div class="week-post-text">What a weekly business review looks like for someone with no team. One 20-minute habit that makes the difference between a business that improves and one that repeats the same month forever.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P11</div>
+          <div class="week-post-text">The one number to check every Friday before you close for the day. Simple, non-negotiable. Builds the habit of tracking without overwhelming people who have never tracked anything before.</div>
+        </div>
+        <div class="week-post">
+          <div class="week-post-num">P12</div>
+          <div class="week-post-text">What separates businesses that grow from businesses that just survive. The honest closing post. Then the natural introduction of the coaching offer — not as a pitch, as a logical next step for people who want to go further.</div>
+        </div>
+      </div>
+      <div class="week-note">Before Post 12 goes out, DM the 2–3 members who replied most consistently throughout the 4 weeks. Offer them the 1:1 coaching directly. The group-wide mention in Post 12 is the secondary conversion point, not the primary one.</div>
+    </div>
+
+    <!-- The offer line -->
+    <div class="card accent-teal" style="margin-top:16px;">
+      <div class="card-label">The offer line — end of Post 12</div>
+      <div class="card-body">
+        <em>"If you want to go through all of this with me personally — where I'm on the phone with you daily and on WhatsApp whenever you need me — I run a 4-week programme where we do exactly this inside your specific business. First sale to a complete stranger guaranteed or your money back. If that's you, reply to this message or DM me directly."</em>
+      </div>
+    </div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- SECTION 8 — RULES -->
+  <div class="section" id="rules">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div class="section-title-wrap">
+        <div class="section-title">The operating rules</div>
+        <div class="section-desc">Non-negotiable. These protect the momentum being built.</div>
+      </div>
+    </div>
+
+    <div class="rules-list">
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Post 3x per week, same days every week.</strong> Consistency is what rebuilds trust in a quiet group — not quality alone. Pick Monday, Wednesday, Friday and protect them.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Every post ends with either a question or a homework.</strong> The group is only alive if people respond. Responses require prompts. Never post without one.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Reply personally to every single person who responds.</strong> In a group of 35, individual replies are visible to everyone. Each personal reply signals to the whole group that engagement is rewarded.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Use real examples from the 35 DM replies in every post.</strong> "A member in this group told me they sell cakes and have no idea which flavour makes the most money" hits 10x harder than a generic scenario. No names — just details.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Never pitch the product before Week 4, Post 12.</strong> Every earlier mention of coaching should feel like a logical conclusion the reader reaches themselves — not a sales move from Karl.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Track engagement per post in a simple note.</strong> Date, post topic, number of replies, who replied. After 4 weeks you will know exactly which topics your audience cares about most. That data shapes Season 2.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>If a week is missed, do not double-post to catch up.</strong> Missing one week resets the streak — it does not justify three posts on Monday. Acknowledge the gap in one line, reset, and continue the next scheduled post.</div>
+      </div>
+      <div class="rule-item">
+        <div class="rule-icon">
+          <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+        </div>
+        <div class="rule-text"><strong>Keep every post under 200 words.</strong> WhatsApp is a thumb-scroll environment. Long posts get read by the sender and no one else. If it needs more than 200 words, it needs to be split into two posts on separate days.</div>
+      </div>
+    </div>
+
+    <div class="card accent-amber" style="margin-top: 24px;">
+      <div class="card-label">The one thing to do today</div>
+      <div class="card-title">Write the 35 DMs</div>
+      <div class="card-body">Not one template — personalise each with whatever is remembered about that person. Even "hey, are you still doing the cakes?" shows you paid attention. That detail is the difference between a reply and silence. Start today. The group post can wait until Wednesday.</div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="footer-brand">Marketing <span>FM</span> — Internal</div>
+    <div class="footer-note">100k Leaks Strategy · Karl Mutua · 2026</div>
+  </div>
+
+</div>
+</body>
+</html>
